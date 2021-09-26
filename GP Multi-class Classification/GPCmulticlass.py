@@ -384,9 +384,9 @@ for i in range(NumofTest):
         pistar = pistar + np.exp(fstar_samples[:,[j]])/sum(np.exp(fstar_samples[:,[j]]))
     pistar = np.transpose(pistar/NumofSample)
     #print(pistar)
-    maxidx = np.where(pistar == np.amax(pistar))
+    maxidx = np.argmax(pistar)
     testlabel = np.zeros((1,NumofClass))
-    testlabel[maxidx[0]] = 1
+    testlabel[0][maxidx] = 1
     decision.append(testlabel.tolist())
     pistar_forall.append(pistar.tolist())
 
@@ -398,12 +398,12 @@ print(decision)
 
 
 for i in range(NumofTest):
-    maxidx = np.where(pistar_forall[i] == np.amax(pistar_forall[i]))
-    if maxidx[0]==0:
+    maxidx = np.argmax(pistar_forall[i])
+    if maxidx==0:
         plt.plot(TestX[0][i], TestX[1][i], '*c', Markersize=10)
-    elif maxidx[0]==1:
+    elif maxidx==1:
         plt.plot(TestX[0][i], TestX[1][i], '*y', Markersize=10)
-    elif maxidx[0]==2:
+    elif maxidx==2:
         plt.plot(TestX[0][i], TestX[1][i], '*b', Markersize=10)
     else:
         plt.plot(TestX[0][i], TestX[1][i], '*g', Markersize=10)
